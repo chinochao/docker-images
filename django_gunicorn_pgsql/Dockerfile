@@ -16,6 +16,6 @@ RUN apk add --no-cache build-base postgresql-client postgresql-dev libldap openl
 
 EXPOSE 8080
 
-CMD sh -c './manage.py collectstatic; \
+CMD sh -c './manage.py collectstatic --noinput; \
            ./manage.py makemigrations; ./manage.py migrate ; \
            gunicorn -b [::]:8080 -k 'gevent' --timeout 120 -w ${WORKERS} ${APPNAME}.wsgi'
