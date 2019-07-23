@@ -4,13 +4,13 @@ django-dbbackup==3.2.0
 django-extensions==2.0.7
 django-filter==1.1.0
 django-queryset-csv==1.0.1
-djangorestframework==3.8.2
+djangorestframework
 djangorestframework-filters==0.10.2
 django-redis
 dnspython
 gevent
 gunicorn[gevent]
-requests==2.19.1
+requests
 pyaml
 python-ldap
 py-dateutil
