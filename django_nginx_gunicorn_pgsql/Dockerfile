@@ -21,9 +21,9 @@ RUN apk add --no-cache build-base \
                        libffi-dev \
                        openldap-dev \
                        musl-dev \
-                       nginx; \
-    pip install --no-cache-dir pip --upgrade; \
-    pip install --no-cache-dir -r ./requirements.txt; \
+                       nginx && \
+    pip install --no-cache-dir pip --upgrade && \
+    pip install --no-cache-dir -r ./requirements.txt && \
     chmod +x /docker-entrypoint
 
 ADD https://raw.githubusercontent.com/chinochao/docker-images/master/django_nginx_gunicorn_pgsql/nginx-default.conf /etc/nginx/nginx.conf
