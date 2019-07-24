@@ -13,14 +13,14 @@ ADD https://raw.githubusercontent.com/chinochao/docker-images/master/django_ngin
 ADD https://raw.githubusercontent.com/chinochao/docker-images/master/django_nginx_gunicorn_pgsql/Procfile /
 ADD https://raw.githubusercontent.com/chinochao/docker-images/master/django_nginx_gunicorn_pgsql/docker-entrypoint /
 
-RUN apk add --no-cache build-base 
-                       postgresql-client 
-                       postgresql-dev 
-                       libldap 
-                       openldap-clients 
-                       libffi-dev 
-                       openldap-dev 
-                       musl-dev 
+RUN apk add --no-cache build-base \
+                       postgresql-client \
+                       postgresql-dev \
+                       libldap \
+                       openldap-clients \
+                       libffi-dev \
+                       openldap-dev \
+                       musl-dev \
                        nginx; \
     pip install --no-cache-dir pip --upgrade; \
     pip install --no-cache-dir -r ./requirements.txt; \
