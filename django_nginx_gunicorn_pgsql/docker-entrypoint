@@ -1,0 +1,23 @@
+#!/bin/bash
+
+# Move to Django App Folder
+cd /var/django/app
+
+# Remove Python Cache Files
+find ./ -iname "*.pyc" -delete
+
+# Django Collect Static
+./manage.py collectstatic --noinput
+
+# Django Makemigrations
+./manage.py makemigrations
+
+# Django Migrate
+./manage.py migrate
+
+# Start Honcho
+if [[ $1 == "server" ]]; then
+	exec honcho -d / start
+fi
+
+exec "$@"
