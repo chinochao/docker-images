@@ -23,8 +23,7 @@ RUN apk add --no-cache build-base \
                        musl-dev \
                        nginx && \
     pip install --no-cache-dir pip --upgrade && \
-    pip install --no-cache-dir -r ./requirements.txt && \
-    chmod +x /docker-entrypoint
+    pip install --no-cache-dir -r ./requirements.txt
 
 ADD https://raw.githubusercontent.com/chinochao/docker-images/master/django_nginx_gunicorn_pgsql/nginx-default.conf /etc/nginx/nginx.conf
 
