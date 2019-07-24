@@ -10,8 +10,8 @@ RUN mkdir -p /var/django/app
 WORKDIR /var/django/app
 
 ADD https://raw.githubusercontent.com/chinochao/docker-images/master/django_nginx_gunicorn_pgsql/requirements.txt .
-ADD https://raw.githubusercontent.com/chinochao/docker-images/master/django_nginx_gunicorn_pgsql/Procfile /
-ADD https://raw.githubusercontent.com/chinochao/docker-images/master/django_nginx_gunicorn_pgsql/docker-entrypoint /
+ADD https://raw.githubusercontent.com/chinochao/docker-images/master/django_nginx_gunicorn_pgsql/Procfile .
+ADD https://raw.githubusercontent.com/chinochao/docker-images/master/django_nginx_gunicorn_pgsql/docker-entrypoint .
 
 RUN apk add --no-cache build-base \
                        postgresql-client \
@@ -29,7 +29,7 @@ RUN apk add --no-cache build-base \
 ADD https://raw.githubusercontent.com/chinochao/docker-images/master/django_nginx_gunicorn_pgsql/nginx-default.conf /etc/nginx/nginx.conf
 
 # Docker EntryPoint
-ENTRYPOINT ["sh","/docker-entrypoint"]
+ENTRYPOINT ["sh","docker-entrypoint"]
 
 # Run server command from docker-entrypoint
 CMD ["server"]

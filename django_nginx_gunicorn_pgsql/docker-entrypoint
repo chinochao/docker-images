@@ -17,7 +17,7 @@ find ./ -iname "*.pyc" -delete
 
 # Start Honcho
 if [[ $1 == "server" ]]; then
-	exec honcho -d / start
+	exec honcho -d /var/django/app/ start
 fi
 
 exec "$@"
