@@ -29,7 +29,7 @@ RUN apk add --no-cache build-base \
 ADD https://raw.githubusercontent.com/chinochao/docker-images/master/django_nginx_gunicorn_pgsql/nginx-default.conf /etc/nginx/nginx.conf
 
 # Docker EntryPoint
-ENTRYPOINT ["/docker-entrypoint"]
+ENTRYPOINT ["sh","/docker-entrypoint"]
 
 # Run server command from docker-entrypoint
 CMD ["server"]
