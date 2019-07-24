@@ -9,9 +9,9 @@ ENV PYTHONDONTWRITEBYTECODE 1
 RUN mkdir -p /var/django/app
 WORKDIR /var/django/app
 
-ADD https://raw.githubusercontent.com/chinochao/docker-images/master/django_nginx_gunicorn_pgsql/requirements.txt .
-ADD https://raw.githubusercontent.com/chinochao/docker-images/master/django_nginx_gunicorn_pgsql/Procfile .
-ADD https://raw.githubusercontent.com/chinochao/docker-images/master/django_nginx_gunicorn_pgsql/docker-entrypoint .
+ADD requirements.txt .
+ADD Procfile .
+ADD docker-entrypoint .
 
 RUN apk add --no-cache build-base \
                        postgresql-client \
@@ -27,7 +27,7 @@ RUN pip install --no-cache-dir pip --upgrade
 
 RUN pip install --no-cache-dir -r ./requirements.txt
 
-ADD https://raw.githubusercontent.com/chinochao/docker-images/master/django_nginx_gunicorn_pgsql/nginx-default.conf /etc/nginx/nginx.conf
+ADD nginx-default.conf /etc/nginx/nginx.conf
 
 # Docker EntryPoint
 ENTRYPOINT ["sh","/var/django/app/docker-entrypoint"]
