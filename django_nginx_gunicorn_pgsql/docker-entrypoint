@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 # Move to Django App Folder
 cd /var/django/app
