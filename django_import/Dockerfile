@@ -10,7 +10,6 @@ RUN mkdir -p /var/django/app
 WORKDIR /var/django/app
 
 COPY requirements.txt /
-COPY docker-entrypoint /
 
 RUN apk add --no-cache build-base \
                        postgresql-client \
