@@ -17,7 +17,7 @@ find ./ -iname "*.pyc" -delete
 
 # Start Honcho
 if [[ $1 == "server" ]]; then
-	exec honcho -d /var/django/app/ start
+	exec gunicorn -b [::]:8000 -k 'gevent' --timeout 120 -w ${WORKERS} ${APPNAME}.wsgi
 fi
 
 exec "$@"

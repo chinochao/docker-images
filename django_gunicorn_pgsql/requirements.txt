@@ -16,5 +16,3 @@ python-ldap
 py-dateutil
 psycopg2
 coreapi
-
-honcho

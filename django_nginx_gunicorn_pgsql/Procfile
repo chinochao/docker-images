@@ -1,2 +1,0 @@
-nginx: /usr/sbin/nginx
-django: gunicorn -b [::]:8000 -k 'gevent' --timeout 120 -w ${WORKERS} ${APPNAME}.wsgi
