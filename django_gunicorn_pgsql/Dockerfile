@@ -13,6 +13,7 @@ COPY requirements.txt /
 COPY docker-entrypoint /
 
 RUN apk add --no-cache build-base \
+                       graphviz \
                        postgresql-client \
                        postgresql-dev \
                        libldap \
