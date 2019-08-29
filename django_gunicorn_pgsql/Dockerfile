@@ -1,7 +1,7 @@
 FROM python:3.7.4-alpine
 
 LABEL maintainer="Roberto Chaud"
-LABEL version="0.2"
+LABEL version="0.3"
 
 ENV PYTHONUNBUFFERED 1
 ENV PYTHONDONTWRITEBYTECODE 1
@@ -13,18 +13,13 @@ COPY requirements.txt /
 COPY docker-entrypoint /
 
 RUN apk add --no-cache build-base \
-                       gcc \
-                       graphviz \
-                       graphviz-dev \
                        postgresql-client \
                        postgresql-dev \
                        libldap \
                        openldap-clients \
                        libffi-dev \
                        openldap-dev \
-                       musl-dev \
-                       nginx
-
+                       musl-dev
 RUN pip install --no-cache-dir pip --upgrade
 
 RUN pip install --no-cache-dir -r /requirements.txt
