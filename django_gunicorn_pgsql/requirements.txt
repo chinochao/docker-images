@@ -15,6 +15,5 @@ pyaml
 python-ldap
 py-dateutil
 psycopg2
-pyparsing
-pydot
+pygraphviz
 coreapi
