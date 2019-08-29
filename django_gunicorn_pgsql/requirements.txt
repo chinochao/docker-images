@@ -15,5 +15,4 @@ pyaml
 python-ldap
 py-dateutil
 psycopg2
-graphviz
 coreapi
