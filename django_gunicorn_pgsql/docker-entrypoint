@@ -15,6 +15,9 @@ find ./ -iname "*.pyc" -delete
 # Django Migrate
 ./manage.py migrate
 
+# Django Test
+./manage.py test --noinput
+
 # Start Honcho
 if [[ $1 == "server" ]]; then
 	exec gunicorn -b [::]:8000 -k 'gevent' --timeout 120 -w ${WORKERS} ${APPNAME}.wsgi
