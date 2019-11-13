@@ -16,11 +16,16 @@ find ./ -iname "*.pyc" -delete
 ./manage.py migrate
 
 # Django Test
-./manage.py test --noinput
+#./manage.py test -v 2 --noinput
+#status=$?
 
-# Start Honcho
+#if [ "$status" -ne 0 ] ; 
+#then
+#   echo -e "Tests Failed"
+#   exit 1
+#fi
+
 if [[ $1 == "server" ]]; then
-	exec gunicorn -b [::]:8000 -k 'gevent' --timeout 120 -w ${WORKERS} ${APPNAME}.wsgi
+   exec gunicorn -b [::]:8000 -k 'gevent' --timeout 120 -w ${WORKERS} ${APPNAME}.wsgi
 fi
-
 exec "$@"
