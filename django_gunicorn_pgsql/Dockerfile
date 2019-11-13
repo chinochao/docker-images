@@ -1,7 +1,7 @@
 FROM python:3.7.4-alpine
 
 LABEL maintainer="Roberto Chaud"
-LABEL version="0.3"
+LABEL version="0.4"
 
 ENV PYTHONUNBUFFERED 1
 ENV PYTHONDONTWRITEBYTECODE 1
