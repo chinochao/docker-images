@@ -16,3 +16,8 @@ custom_venvs:
     ansible_version: 2.7.10
     python_modules:
       - pyvmomi
+  - name: vmware_team2
+    python_version: python3.6
+    ansible_version: 2.7.10
+    python_modules:
+      - pyvmomi
