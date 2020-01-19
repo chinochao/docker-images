@@ -8,19 +8,9 @@
 
 {% for custom_venv in custom_venvs %}
     - pip:
-      name: 
-        - psutil
-        {% if custom_venv.ansible_version is defined %}
-        - ansible=={{ custom_venv.ansible_version }}
-        {% else %}
-        - ansible
-        {% endif %}
-        {% if custom_venv.python_modules is defined %}
-        {% for module in custom_venv.python_modules %}
-        - {{ module }}
-        {% endfor %}
-        {% endif %}
-      virtualenv: /opt/custom-venvs/{{ custom_venv.name }}
-      virtualenv_python: {{custom_venv.python_version}}
+        name: psutil {% if custom_venv.ansible_version is defined %}ansible=={{ custom_venv.ansible_version }} {% else %}ansible {% endif %}{% if custom_venv.python_modules is defined %}{% for module in custom_venv.python_modules %}{{ module }} {% endfor %}{% endif %}
+        
+        virtualenv: /opt/custom-venvs/{{ custom_venv.name }}
+        virtualenv_python: {{custom_venv.python_version}}
 {% endfor %}
 

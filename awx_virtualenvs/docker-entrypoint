@@ -8,9 +8,8 @@ if [[ $1 == "setup" ]]; then
     wget -O extra_vars.yaml $YAML_URL
 
     # Create Ansible Playbook from Template
-    ansible all -i "localhost," -m template -a "src=ansible_template.j2 dest=custom_envs.yaml" --connection=local --extra-vars "@extra_vars.yaml"
+    ansible all -i "localhost," -m template -a "src=/opt/setup/ansible_template.j2 dest=/opt/custom-venvs/custom_envs.yaml" --connection=local --extra-vars "@extra_vars.yaml"
 
     # Run the new custom_envs.yaml with all Ansible Environments
-    ansible-playbook -i "localhost," custom_envs.yaml
+    ansible-playbook -i "localhost," /opt/custom-venvs/custom_envs.yaml
 fi
-exec "$@"
