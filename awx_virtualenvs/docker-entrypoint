@@ -1,0 +1,16 @@
+#!/bin/sh
+
+# Move to Setup Folder
+cd /opt/setup
+
+if [[ $1 == "setup" ]]; then
+    # Download YAML
+    wget -O extra_vars.yaml $YAML_URL
+
+    # Create Ansible Playbook from Template
+    ansible all -i "localhost," -m template -a "src=ansible_template.j2 dest=custom_envs.yaml" --connection=local --extra-vars "@extra_vars.yaml"
+
+    # Run the new custom_envs.yaml with all Ansible Environments
+    ansible-playbook -i "localhost," custom_envs.yaml
+fi
+exec "$@"

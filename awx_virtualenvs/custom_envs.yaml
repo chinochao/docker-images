@@ -1,0 +1,30 @@
+---
+- name: Ansible Virtualenvs 
+  connection: local
+  gather_facts: false
+  hosts: localhost
+  tasks:
+
+    - pip:
+      name: 
+        - psutil
+        - ansible==2.9.3
+        - boto3
+        - pyvmomi
+      virtualenv: /opt/custom-venvs/ansible-latest
+      virtualenv_python: python3.6
+    - pip:
+      name: 
+        - psutil
+        - ansible==2.8.0
+        - winrm
+      virtualenv: /opt/custom-venvs/windows_team
+      virtualenv_python: python2.7
+    - pip:
+      name: 
+        - psutil
+        - ansible==2.7.10
+        - pyvmomi
+      virtualenv: /opt/custom-venvs/vmware_team
+      virtualenv_python: python3.6
+

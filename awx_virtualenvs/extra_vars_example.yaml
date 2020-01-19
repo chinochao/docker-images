@@ -1,0 +1,18 @@
+---
+custom_venvs:
+  - name: ansible-latest # no spaces
+    python_version: python3.6 # Defaults to python3.6
+    ansible_version: 2.9.3
+    python_modules:
+      - boto3
+      - pyvmomi
+  - name: windows_team
+    python_version: python2.7
+    ansible_version: 2.8.0
+    python_modules:
+      - winrm
+  - name: vmware_team
+    python_version: python3.6
+    ansible_version: 2.7.10
+    python_modules:
+      - pyvmomi
