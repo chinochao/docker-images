@@ -9,6 +9,7 @@ RUN mkdir -p /opt/custom-venvs && \
 WORKDIR /opt/setup
 
 COPY docker-entrypoint /
+COPY ansible_template.j2 /opt/setup/
 
 RUN yum install -y wget ansible curl python-setuptools epel-release \
                 openssl openssl-devel gcc python-devel && \
