@@ -12,5 +12,6 @@
         
         virtualenv: /opt/custom-venvs/{{ custom_venv.name }}
         virtualenv_python: {{custom_venv.python_version}}
+        state: forcereinstall
 {% endfor %}
 
