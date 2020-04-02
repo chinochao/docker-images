@@ -20,10 +20,15 @@
     CONFIG_LDAP_SERVICE_ACCOUNT_USERNAME: "{{ lookup('env','CONFIG_LDAP_SERVICE_ACCOUNT_USERNAME') }}"
     CONFIG_LDAP_SERVICE_ACCOUNT_PASSWORD: "{{ lookup('env','CONFIG_LDAP_SERVICE_ACCOUNT_PASSWORD') }}"
     CONFIG_LDAP_SEARCH_DN: "{{ lookup('env','CONFIG_LDAP_SEARCH_DN') }}"
+    CONFIG_LDAP_BIND_DN: "{{ lookup('env','CONFIG_LDAP_BIND_DN') }}"
     CONFIG_LDAP_SSL_VERIFY: "{{ lookup('env','CONFIG_LDAP_SSL_VERIFY') | default('true', true) }}"
     CONFIG_LDAP_TRANSPORT: "{{ lookup('env','CONFIG_LDAP_TRANSPORT') | default('clear', true) }}"
     CONFIG_LDAP_PORT: "{{ lookup('env','CONFIG_LDAP_PORT') | default('636', true) }}"
     CONFIG_LDAP_SECRET: "{{ lookup('env','CONFIG_LDAP_SECRET') }}"
+    CONFIG_LDAP_EXEMPT_OU_1: "{{ lookup('env','CONFIG_LDAP_EXEMPT_OU_1') }}"
+    CONFIG_LDAP_EXEMPT_OU_2: "{{ lookup('env','CONFIG_LDAP_EXEMPT_OU_2') }}"
+    CONFIG_LDAP_EXEMPT_OU_3: "{{ lookup('env','CONFIG_LDAP_EXEMPT_OU_3') }}"
+    CONFIG_LDAP_EXEMPT_OU_4: "{{ lookup('env','CONFIG_LDAP_EXEMPT_OU_4') }}"
 
   tasks:
   - name: Create config /opt/duoauthproxy/conf/authproxy.cfg
