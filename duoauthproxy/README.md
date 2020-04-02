@@ -13,7 +13,9 @@ CONFIG_LDAP_HOST : Host for AD/LDAP , RADIUS
 CONFIG_LDAP_SERVICE_ACCOUNT_USERNAME : LDAP Service Account Username
 CONFIG_LDAP_SERVICE_ACCOUNT_PASSWORD : LDAP Service Account Password
 CONFIG_LDAP_SEARCH_DN : LDAP Search DN
+CONFIG_LDAP_BIND_DN : LDAP Account Full DN
 CONFIG_LDAP_SECRET : Only needed if using RADIUS
+CONFIG_LDAP_EXEMPT_OU_1 : Exempt User or Group
 
 ## Optional environment variables:
 CONFIG_DEBUG : Debug logs (Defaults to false, choices are true or false)
@@ -24,3 +26,6 @@ CONFIG_LDAP_HOST_2 : Secondary/fallback domain controller
 CONFIG_LDAP_HOST_3 : Tertiary/fallback domain controller
 CONFIG_LDAP_HOST_4 : Quaternary/fallback domain controller
 CONFIG_LDAP_HOST_5 : Quinary/fallback domain controller
+CONFIG_LDAP_EXEMPT_OU_2 : Extra user or groups to exempt
+CONFIG_LDAP_EXEMPT_OU_3 : Extra user or groups to exempt
+CONFIG_LDAP_EXEMPT_OU_4 : Extra user or groups to exempt

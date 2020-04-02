@@ -16,6 +16,7 @@ host_5={{ CONFIG_LDAP_HOST_5 }}
 service_account_username={{ CONFIG_LDAP_SERVICE_ACCOUNT_USERNAME }}
 service_account_password={{ CONFIG_LDAP_SERVICE_ACCOUNT_PASSWORD }}
 search_dn={{ CONFIG_LDAP_SEARCH_DN }}
+bind_dn={{ CONFIG_LDAP_BIND_DN }}
 ssl_verify_hostname={{ CONFIG_LDAP_SSL_VERIFY }}
 transport={{ CONFIG_LDAP_TRANSPORT }}
 port={{ CONFIG_LDAP_PORT }}
@@ -27,6 +28,16 @@ ikey={{ DUO_IKEY }}
 skey={{ DUO_SKEY }}
 api_host={{ DUO_API_HOST }}
 port=1389
+exempt_primary_bind=false
+exempt_ou_1={{ CONFIG_LDAP_EXEMPT_OU_1 }}
+{% if CONFIG_LDAP_EXEMPT_OU_2 %}
+exempt_ou_2={{ CONFIG_LDAP_EXEMPT_OU_2 }}
+{% elif CONFIG_LDAP_EXEMPT_OU_1 %}
+exempt_ou_3={{ CONFIG_LDAP_EXEMPT_OU_3 }}
+{% elif CONFIG_LDAP_EXEMPT_OU_1 %}
+exempt_ou_4={{ CONFIG_LDAP_EXEMPT_OU_4 }}
+{% endif %}
+allow_unlimited_binds=true
 {% endif %}
 
 {% if CONFIG_CLIENT == 'radius_client' %}
