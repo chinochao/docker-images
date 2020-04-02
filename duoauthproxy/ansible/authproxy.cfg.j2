@@ -1,0 +1,63 @@
+[main]
+debug={{ CONFIG_DEBUG }}
+
+{% if CONFIG_CLIENT == 'ad_client' %}
+[ad_client]
+host={{ CONFIG_LDAP_HOST }}
+{% if CONFIG_LDAP_HOST_2 %}
+host_2={{ CONFIG_LDAP_HOST_2 }}
+{% elif CONFIG_LDAP_HOST_3 %}
+host_3={{ CONFIG_LDAP_HOST_3 }}
+{% elif CONFIG_LDAP_HOST_4 %}
+host_4={{ CONFIG_LDAP_HOST_4 }}
+{% elif CONFIG_LDAP_HOST_5 %}
+host_5={{ CONFIG_LDAP_HOST_5 }}
+{% endif %}
+service_account_username={{ CONFIG_LDAP_SERVICE_ACCOUNT_USERNAME }}
+service_account_password={{ CONFIG_LDAP_SERVICE_ACCOUNT_PASSWORD }}
+search_dn={{ CONFIG_LDAP_SEARCH_DN }}
+ssl_verify_hostname={{ CONFIG_LDAP_SSL_VERIFY }}
+transport={{ CONFIG_LDAP_TRANSPORT }}
+port={{ CONFIG_LDAP_PORT }}
+;Port would still be 389/636/etc here to send to the domain controller
+
+
+[ldap_server_auto]
+ikey={{ DUO_IKEY }}
+skey={{ DUO_SKEY }}
+api_host={{ DUO_API_HOST }}
+port=1389
+{% endif %}
+
+{% if CONFIG_CLIENT == 'radius_client' %}
+[radius_client]
+host={{ CONFIG_LDAP_HOST }}
+{% if CONFIG_LDAP_HOST_2 %}
+host_2={{ CONFIG_LDAP_HOST_2 }}
+{% elif CONFIG_LDAP_HOST_3 %}
+host_3={{ CONFIG_LDAP_HOST_3 }}
+{% elif CONFIG_LDAP_HOST_4 %}
+host_4={{ CONFIG_LDAP_HOST_4 }}
+{% elif CONFIG_LDAP_HOST_5 %}
+host_5={{ CONFIG_LDAP_HOST_5 }}
+{% endif %}
+secret={{ CONFIG_LDAP_SECRET }}
+port={{ CONFIG_LDAP_PORT }}
+
+
+[ldap_server_auto]
+ikey={{ DUO_IKEY }}
+skey={{ DUO_SKEY }}
+api_host={{ DUO_API_HOST }}
+port=1389
+
+[radius_server_auto]
+ikey=DIXXXXXXXXXXXXXXXXXX
+skey=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+api_host=api-XXXXXXXX.duosecurity.com
+failmode=safe
+radius_ip_1=5.6.7.8
+radius_secret_1=thisisalsoaradiussecret
+client=radius_client
+{% endif %}
+

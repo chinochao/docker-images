@@ -1,0 +1,35 @@
+---
+- hosts: 127.0.0.1
+  connection: local
+  gather_facts: no
+
+  vars:
+    # Duo variables
+    DUO_API_HOST: "{{ lookup('env','DUO_API_HOST') }}"
+    DUO_IKEY: "{{ lookup('env','DUO_IKEY') }}"
+    DUO_SKEY: "{{ lookup('env','DUO_SKEY') }}"
+    # Main config variables
+    CONFIG_DEBUG: "{{ lookup('env','CONFIG_DEBUG') | default('false', true) }}"
+    # Client Config
+    CONFIG_CLIENT: "{{ lookup('env','CONFIG_CLIENT') }}"
+    CONFIG_LDAP_HOST: "{{ lookup('env','CONFIG_LDAP_HOST') }}"
+    CONFIG_LDAP_HOST_2: "{{ lookup('env','CONFIG_LDAP_HOST_2') }}"
+    CONFIG_LDAP_HOST_3: "{{ lookup('env','CONFIG_LDAP_HOST_3') }}"
+    CONFIG_LDAP_HOST_4: "{{ lookup('env','CONFIG_LDAP_HOST_4') }}"
+    CONFIG_LDAP_HOST_5: "{{ lookup('env','CONFIG_LDAP_HOST_5') }}"
+    CONFIG_LDAP_SERVICE_ACCOUNT_USERNAME: "{{ lookup('env','CONFIG_LDAP_SERVICE_ACCOUNT_USERNAME') }}"
+    CONFIG_LDAP_SERVICE_ACCOUNT_PASSWORD: "{{ lookup('env','CONFIG_LDAP_SERVICE_ACCOUNT_PASSWORD') }}"
+    CONFIG_LDAP_SEARCH_DN: "{{ lookup('env','CONFIG_LDAP_SEARCH_DN') }}"
+    CONFIG_LDAP_SSL_VERIFY: "{{ lookup('env','CONFIG_LDAP_SSL_VERIFY') | default('true', true) }}"
+    CONFIG_LDAP_TRANSPORT: "{{ lookup('env','CONFIG_LDAP_TRANSPORT') | default('clear', true) }}"
+    CONFIG_LDAP_PORT: "{{ lookup('env','CONFIG_LDAP_PORT') | default('636', true) }}"
+    CONFIG_LDAP_SECRET: "{{ lookup('env','CONFIG_LDAP_SECRET') }}"
+
+  tasks:
+  - name: Create config /opt/duoauthproxy/conf/authproxy.cfg
+    template:
+      src: /opt/authproxy.cfg.j2
+      dest: /opt/duoauthproxy/conf/authproxy.cfg
+      owner: duo_authproxy_svc 
+      group: duo_authproxy_grp
+      mode: '0640'

@@ -1,0 +1,14 @@
+#!/bin/sh
+
+cd /opt/
+ANSIBLE_RETRY_FILES_ENABLED=0 ANSIBLE_REMOTE_TEMP=/tmp/.ansible-${USER}/tmp ansible-playbook set_config.yaml
+
+if [[ $1 == "duoproxy" ]]; then
+   /opt/duoauthproxy/bin/authproxy_connectivity_tool
+   config_check=$?
+   if [ $config_check -ne 0 ]; then
+      exit 1
+   fi
+   exec /opt/duoauthproxy/usr/local/bin/python /opt/duoauthproxy/usr/local/bin/twistd --pidfile=/opt/duoauthproxy/run/duoauthproxy.pid --python=/opt/duoauthproxy/bin/duoauthproxy.tap --uid=999 --gid=997 --nodaemon
+fi
+exec "$@"
