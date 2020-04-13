@@ -28,4 +28,4 @@ ENTRYPOINT ["/docker-entrypoint"]
 # Run server command from docker-entrypoint
 CMD ["duoproxy"]
 
-EXPOSE 1389
+EXPOSE 1389 1636

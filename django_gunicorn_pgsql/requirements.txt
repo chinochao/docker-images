@@ -15,6 +15,8 @@ django-queryset-csv==1.0.1
 django-redis==4.10.0
 djangorestframework-filters==1.0.0.dev0
 djangorestframework==3.10.1
+django-reversion==3.0.7
+django-q==1.2.1
 dnspython==1.16.0
 gevent==1.4.0
 greenlet==0.4.15
