@@ -7,12 +7,31 @@
   tasks:
 
 {% for custom_venv in custom_venvs %}
-    - name: Environment {{ custom_venv.name }}
+    - name: Upgrade Pip Environment {{ custom_venv.name }}
       pip:
-        name: psutil {% if custom_venv.ansible_version is defined %}ansible=={{ custom_venv.ansible_version }} {% else %}ansible {% endif %}{% if custom_venv.python_modules is defined %}{% for module in custom_venv.python_modules %}{{ module }} {% endfor %}{% endif %}
-        
+        name: pip
+        state: latest
         virtualenv: /opt/custom-venvs/{{ custom_venv.name }}
         virtualenv_python: {{custom_venv.python_version}}
         extra_args: --upgrade
-{% endfor %}
 
+    - name: Environment {{ custom_venv.name }}
+      pip:{% raw %}
+        name: "{{ item }}"
+        {% endraw %}
+        virtualenv: /opt/custom-venvs/{{ custom_venv.name }}
+        virtualenv_python: {{custom_venv.python_version}}
+        extra_args: --upgrade
+      with_items:
+        - psutil
+        {% if custom_venv.ansible_version is defined %}
+        - ansible=={{ custom_venv.ansible_version }}
+        {% else %}
+        - ansible
+        {% endif %}
+        {% if custom_venv.python_modules is defined %}
+        {% for module in custom_venv.python_modules %}
+        - {{ module }}
+        {% endfor %}
+        {% endif %}
+{% endfor %}

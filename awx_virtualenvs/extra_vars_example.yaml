@@ -1,23 +1,19 @@
 ---
 custom_venvs:
-  - name: ansible-latest # no spaces
-    python_version: python3.6 # Defaults to python3.6
-    ansible_version: 2.9.4
+  - name: ansible-2_9_3
+    python_version: python3.6
+    ansible_version: 2.9.3
     python_modules:
+      - aiohttp
+      - hvac>=0.10.0
+      - botocore
       - boto3
-      - pyvmomi
-  - name: windows_team
-    python_version: python2.7
-    ansible_version: 2.8.0
-    python_modules:
-      - pywinrm>=0.3.0
-  - name: vmware_team
+  - name: ansible-2_9_16
     python_version: python3.6
-    ansible_version: 2.7.10
+    ansible_version: 2.9.16
     python_modules:
-      - pyvmomi
-  - name: vmware_team2
-    python_version: python3.6
-    ansible_version: 2.7.10
-    python_modules:
-      - pyvmomi
+      - aiohttp
+      - hvac>=0.10.0
+      - botocore
+      - boto3
+      - openstacksdk
