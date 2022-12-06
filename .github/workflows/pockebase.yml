@@ -11,7 +11,7 @@ on:
 
 jobs:
   build_scan_push:
-    uses: .github/workflows/r_build_scan_push.yml@main
+    uses:  chinochao/docker-images/.github/workflows/r_build_scan_push.yml@main
     with:
       directory: pocketbase
     secrets:
