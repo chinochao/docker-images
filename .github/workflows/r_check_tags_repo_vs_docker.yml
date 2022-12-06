@@ -15,7 +15,7 @@ on:
 
 
 jobs:
-  build_scan_push:
+  github_vs_docker:
     runs-on: [ ubuntu-latest ]
     outputs:
       docker_version: ${{ steps.repo_version.outputs }}
