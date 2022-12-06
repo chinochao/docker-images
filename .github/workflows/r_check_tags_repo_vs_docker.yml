@@ -1,0 +1,30 @@
+name: Reusable Compare GitHub vs Docker
+
+on:
+  workflow_call:
+    inputs:
+      repo_github:
+        description: "Image Directory: "
+        type: string
+        required: true
+      repo_docker:
+        description: "Image Directory: "
+        type: string
+        required: true
+
+
+
+jobs:
+  build_scan_push:
+    runs-on: [ ubuntu-latest ]
+    outputs:
+      docker_version: ${{ steps.repo_version.outputs }}
+      repo_version: ${{ steps.repo_version.outputs }}
+    steps:
+      - name: Get Latest Release
+        run: curl -s 'https://api.github.com/repos/${{ inputs.repo_github }}/releases/latest'|jq -r .tag_name
+        id: repo_version
+
+      - name: Get Docker Releases
+        run: curl -s 'https://hub.docker.com/v2/repositories/${{ inputs.repo_docker }}/tags'|jq -r ".results[].name"
+        register: docker_version

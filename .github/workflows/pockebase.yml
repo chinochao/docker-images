@@ -17,3 +17,11 @@ jobs:
     secrets:
       DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
       DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+
+  # build_scan_push:
+  #   uses:  chinochao/docker-images/.github/workflows/r_build_scan_push.yml@master
+  #   with:
+  #     directory: pocketbase
+  #   secrets:
+  #     DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+  #     DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
