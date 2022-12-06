@@ -10,13 +10,11 @@ on:
   #   - cron: '5 4 2 * *'
 
 jobs:
-  build_scan_push:
-    uses:  chinochao/docker-images/.github/workflows/r_build_scan_push.yml@master
+  check:
+    uses:  chinochao/docker-images/.github/workflows/r_check_tags_repo_vs_docker.yml@master
     with:
-      directory: pocketbase
-    secrets:
-      DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
-      DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+      repo_github: pocketbase/pocketbase
+      repo_docker: chaudric/pocketbase
 
   # build_scan_push:
   #   uses:  chinochao/docker-images/.github/workflows/r_build_scan_push.yml@master
