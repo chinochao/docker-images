@@ -1,0 +1,19 @@
+name: Pocketbase
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['pocketbase/**']
+  # schedule:
+  #   # Runs "At 04:05 on day-of-month 2." (see https://crontab.guru)
+  #   - cron: '5 4 2 * *'
+
+jobs:
+  build_scan_push:
+    uses: .github/workflows/reusable_build_scan_push.yml@main
+    with:
+      directory: pocketbase
+    secrets:
+      DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+      DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
