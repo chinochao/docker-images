@@ -46,10 +46,10 @@ jobs:
         with:
           context: ${{ github.workspace }}/${{ inputs.directory }}
           tags: |
-            chaudric/${{ inputs.directory }}:$PB_LATEST
+            chaudric/${{ inputs.directory }}:${{ env.PB_LATEST }}
             chaudric/${{ inputs.directory }}:latest
           build-args: |
-            PB_VERSION: $PB_LATEST
+            PB_VERSION: ${{ env.PB_LATEST }}
 
       - name: Trivy scan image
         run: |
@@ -65,12 +65,12 @@ jobs:
         with:
           context: ${{ github.workspace }}/${{ inputs.directory }}
           tags: |
-            chaudric/${{ inputs.directory }}:$PB_LATEST
+            chaudric/${{ inputs.directory }}:${{ env.PB_LATEST }}
             chaudric/${{ inputs.directory }}:latest
           # build on feature branches, push only on main branch
           push: ${{ github.ref == 'refs/heads/master' }}
           build-args: |
-            PB_VERSION: $PB_LATEST
+            PB_VERSION: ${{ env.PB_LATEST }}
 
       - name: Clean up
         if: always()
