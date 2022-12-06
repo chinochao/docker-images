@@ -1,0 +1,79 @@
+name: Reusable Build Scan Push
+
+on:
+  workflow_call:
+    inputs:
+      directory:
+        description: "Image Directory: "
+        type: string
+        required: true
+    secrets:
+      DOCKER_USERNAME:
+        required: true
+      DOCKER_PASSWORD:
+        required: true
+
+
+
+jobs:
+  build_scan_push:
+    runs-on: [ ubuntu-latest ]
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Install Trivy Scanner
+        run: |
+          mkdir $GITHUB_WORKSPACE/bin
+          cd $GITHUB_WORKSPACE/bin
+          curl -s https://${{ secrets.API_GITHUB_COM_TOKEN }}@api.github.com/repos/aquasecurity/trivy/releases/latest | \
+          grep -o "\"https.*_Linux-64bit.tar.gz\"" | \
+          xargs curl -o trivy.tar.gz -OL
+          tar -xvf trivy.tar.gz
+
+      - name: Get Latest Release
+        run: |
+              ./trivy image \
+              --severity CRITICAL \
+              --security-checks vuln \
+              --exit-code 1 \
+              chaudric/${{ inputs.directory }}:latest
+        working-directory: bin
+
+      - name: Login to Docker
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Build Image
+        uses: docker/build-push-action@v2
+        with:
+          context: $GITHUB_WORKSPACE/${{ inputs.directory }}
+          tags: |
+            chaudric/${{ inputs.directory }}:latest
+          # build on feature branches, push only on main branch
+          push: ${{ github.ref == 'refs/heads/master' }}
+
+      - name: Trivy scan image
+        run: |
+              ./trivy image \
+              --severity CRITICAL \
+              --security-checks vuln \
+              --exit-code 1 \
+              chaudric/${{ inputs.directory }}:latest
+        working-directory: bin
+
+      - name: Push Image
+        uses: docker/build-push-action@v2
+        with:
+          context: $GITHUB_WORKSPACE/${{ inputs.directory }}
+          tags: |
+            chaudric/${{ inputs.directory }}:latest
+          # build on feature branches, push only on main branch
+          push: ${{ github.ref == 'refs/heads/master' }}
+
+      - name: Clean up
+        if: always()
+        run: |
+          rm -rvf $GITHUB_WORKSPACE/bin
