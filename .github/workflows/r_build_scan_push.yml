@@ -48,7 +48,7 @@ jobs:
           tags: |
             chaudric/${{ inputs.directory }}:$PB_LATEST
             chaudric/${{ inputs.directory }}:latest
-          build-args:
+          build-args: |
             PB_VERSION: $PB_LATEST
 
       - name: Trivy scan image
@@ -69,7 +69,7 @@ jobs:
             chaudric/${{ inputs.directory }}:latest
           # build on feature branches, push only on main branch
           push: ${{ github.ref == 'refs/heads/master' }}
-          build-args:
+          build-args: |
             PB_VERSION: $PB_LATEST
 
       - name: Clean up
