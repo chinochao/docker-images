@@ -31,14 +31,9 @@ jobs:
           xargs curl -o trivy.tar.gz -OL
           tar -xvf trivy.tar.gz
 
-      # - name: Get Latest Release
-      #   run: |
-      #         ./trivy image \
-      #         --severity CRITICAL \
-      #         --security-checks vuln \
-      #         --exit-code 1 \
-      #         chaudric/${{ inputs.directory }}:latest
-      #   working-directory: bin
+      - name: Get Latest Release
+        run: echo "PB_LATEST=$(curl -s 'https://api.github.com/repos/pocketbase/pocketbase/releases/latest'|jq -r .tag_name)" >> $GITHUB_ENV
+
 
       - name: Login to Docker
         uses: docker/login-action@v2
@@ -51,7 +46,10 @@ jobs:
         with:
           context: ${{ github.workspace }}/${{ inputs.directory }}
           tags: |
+            chaudric/${{ inputs.directory }}:$PB_LATEST
             chaudric/${{ inputs.directory }}:latest
+          build-args:
+            PB_VERSION: $PB_LATEST
 
       - name: Trivy scan image
         run: |
@@ -67,9 +65,12 @@ jobs:
         with:
           context: ${{ github.workspace }}/${{ inputs.directory }}
           tags: |
+            chaudric/${{ inputs.directory }}:$PB_LATEST
             chaudric/${{ inputs.directory }}:latest
           # build on feature branches, push only on main branch
           push: ${{ github.ref == 'refs/heads/master' }}
+          build-args:
+            PB_VERSION: $PB_LATEST
 
       - name: Clean up
         if: always()
