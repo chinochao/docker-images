@@ -7,13 +7,15 @@ on:
         description: "Image Directory: "
         type: string
         required: true
+      version:
+        description: "Pocketbase verion: "
+        type: string
+        required: true
     secrets:
       DOCKER_USERNAME:
         required: true
       DOCKER_PASSWORD:
         required: true
-
-
 
 jobs:
   build_scan_push:
@@ -31,9 +33,6 @@ jobs:
           xargs curl -o trivy.tar.gz -OL
           tar -xvf trivy.tar.gz
 
-      - name: Get Latest Release
-        run: echo "PB_LATEST=$(curl -s 'https://api.github.com/repos/pocketbase/pocketbase/releases/latest'|jq -r .tag_name)" >> $GITHUB_ENV
-
       - name: Login to Docker
         uses: docker/login-action@v2
         with:
@@ -45,10 +44,10 @@ jobs:
         with:
           context: ${{ github.workspace }}/${{ inputs.directory }}
           tags: |
-            chaudric/${{ inputs.directory }}:${{ env.PB_LATEST }}
+            chaudric/${{ inputs.directory }}:${{ inputs.version }}
             chaudric/${{ inputs.directory }}:latest
           build-args: |
-            PB_VERSION: ${{ env.PB_LATEST }}
+            PB_VERSION: ${{ inputs.version }}
 
       - name: Trivy scan image
         run: |
@@ -64,12 +63,12 @@ jobs:
         with:
           context: ${{ github.workspace }}/${{ inputs.directory }}
           tags: |
-            chaudric/${{ inputs.directory }}:${{ env.PB_LATEST }}
+            chaudric/${{ inputs.directory }}:${{ inputs.version }}
             chaudric/${{ inputs.directory }}:latest
           # build on feature branches, push only on main branch
           push: ${{ github.ref == 'refs/heads/master' }}
           build-args: |
-            PB_VERSION: ${{ env.PB_LATEST }}
+            PB_VERSION: ${{ inputs.version }}
 
       - name: Clean up
         if: always()
