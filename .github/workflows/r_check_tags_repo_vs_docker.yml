@@ -18,8 +18,8 @@ jobs:
   github_vs_docker:
     runs-on: [ ubuntu-latest ]
     outputs:
-      docker_version: ${{ steps.docker_version.outputs.docker_version }}
-      repo_version: ${{ steps.repo_version.outputs.repo_version }}
+      docker_version: ${{ steps.docker.outputs.docker_version }}
+      repo_version: ${{ steps.repo.outputs.repo_version }}
     steps:
       - name: Get Latest Release
         run: curl -s 'https://api.github.com/repos/${{ inputs.repo_github }}/releases/latest'|jq -r .tag_name
