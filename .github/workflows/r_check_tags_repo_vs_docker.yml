@@ -12,8 +12,6 @@ on:
         type: string
         required: true
 
-
-
 jobs:
   github_vs_docker:
     runs-on: [ ubuntu-latest ]
@@ -29,4 +27,4 @@ jobs:
         run: curl -s 'https://hub.docker.com/v2/repositories/${{ inputs.repo_docker }}/tags'|jq -r ".results[].name"
         id: docker
 
-      - run: echo "${{ docker_version }}"
+      - run: echo "${{ docker }}"
