@@ -23,8 +23,10 @@ jobs:
     steps:
       - name: Get Latest Release
         run: curl -s 'https://api.github.com/repos/${{ inputs.repo_github }}/releases/latest'|jq -r .tag_name
-        id: repo_version
+        id: repo
 
       - name: Get Docker Releases
         run: curl -s 'https://hub.docker.com/v2/repositories/${{ inputs.repo_docker }}/tags'|jq -r ".results[].name"
-        id: docker_version
+        id: docker
+
+      - run: echo "${{ docker_version }}"
