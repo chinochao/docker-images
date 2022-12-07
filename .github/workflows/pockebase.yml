@@ -16,12 +16,12 @@ jobs:
       repo_github: pocketbase/pocketbase
       repo_docker: chaudric/pocketbase
 
-  build_scan_push:
-    uses:  chinochao/docker-images/.github/workflows/r_build_scan_push.yml@master
-    needs: check
-    if: ${{ !contains(needs.check.outputs.docker_version, needs.check.outputs.repo_version) }}
-    with:
-      directory: pocketbase
-    secrets:
-      DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
-      DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+  # build_scan_push:
+  #   uses:  chinochao/docker-images/.github/workflows/r_build_scan_push.yml@master
+  #   needs: check
+  #   if: ${{ !contains(needs.check.outputs.docker_version, needs.check.outputs.repo_version) }}
+  #   with:
+  #     directory: pocketbase
+  #   secrets:
+  #     DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+  #     DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
