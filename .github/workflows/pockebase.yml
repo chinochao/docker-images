@@ -19,10 +19,10 @@ jobs:
   build_scan_push:
     uses:  chinochao/docker-images/.github/workflows/r_build_scan_push.yml@master
     needs: check
-    if: ${{ !contains(needs.check.outputs.docker_version, needs.check.outputs.repo_version) }}
+    # if: ${{ !contains(needs.check.outputs.docker_version, needs.check.outputs.repo_version) }}
     with:
       directory: pocketbase
-      version: ${{ needs.check.outputs.repo_version }}
+      version: ${{ needs.check.outputs.docker_version }}
     secrets:
       DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
       DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
