@@ -26,5 +26,3 @@ jobs:
       - name: Get Docker Releases
         run: echo "::set-output name=docker_version::$(curl -s 'https://hub.docker.com/v2/repositories/${{ inputs.repo_docker }}/tags'|jq -r .results[].name|paste -s -d, -)"
         id: docker
-
-      - run: echo "${{ steps.docker.outputs.docker_version }}"
