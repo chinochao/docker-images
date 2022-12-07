@@ -27,4 +27,4 @@ jobs:
         run: curl -s 'https://hub.docker.com/v2/repositories/${{ inputs.repo_docker }}/tags'|jq -r ".results[].name"
         id: docker
 
-      - run: echo "${{ docker }}"
+      - run: echo "${{ steps.docker }}"
