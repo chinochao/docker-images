@@ -11,6 +11,11 @@ on:
         description: "Image Directory: "
         type: string
         required: true
+    outputs:
+      docker_version:
+        value: ${{ jobs.github_vs_docker.outputs.docker_version }}
+      repo_version:
+        value: ${{ jobs.github_vs_docker.outputs.repo_version }}
 
 jobs:
   github_vs_docker:
